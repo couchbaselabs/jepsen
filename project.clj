@@ -8,6 +8,7 @@
                            [com.novemberain/monger "1.5.0"]
                            [org.clojure/java.jdbc "0.3.0-alpha1"]
                            [korma "0.3.0-RC5"]
+                           [apage43/cbdrawer "0.2.1"]
                            [postgresql/postgresql "8.4-702.jdbc4"]
                            [org.clojure/tools.cli "0.2.2"]
                            [com.nuodb.jdbc/nuodb-jdbc "1.1.1"]
