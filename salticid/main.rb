@@ -6,11 +6,12 @@ load __DIR__/'nuodb.rb'
 load __DIR__/'postgres.rb'
 load __DIR__/'redis.rb'
 load __DIR__/'riak.rb'
+load __DIR__/'couchbase.rb'
 
 role :base do
   task :setup do
     sudo do
-      exec! 'apt-get install -y ntp curl wget build-essential git-core vim psmisc iptables dnsutils telnet nmap', echo: true
+      exec! 'yum install -y ntp curl wget build-essential git-core vim psmisc iptables dnsutils telnet nmap', echo: true
     end
   end
 
@@ -31,9 +32,11 @@ role :jepsen do
     postgres.setup
     redis.setup
     riak.setup
+    couchbase.setup
   end
  
   task :slow do
+    sudo { exec! 'tc qdisc del dev eth0 root || true' }
     sudo { exec! 'tc qdisc add dev eth0 root netem delay 50ms 5ms distribution normal' }
   end
 
@@ -113,7 +116,7 @@ group :jepsen do
   host :n5
   
   each_host do
-    user :ubuntu
+    user :root
     role :base
     role :cassandra
     role :etcd
@@ -123,8 +126,10 @@ group :jepsen do
     role :postgres
     role :redis
     role :riak
+    role :couchbase
     role :zk
     role :jepsen
-    @password = 'ubuntu'
+    role :deploy
+    @password = 'couchbase'
   end
 end
