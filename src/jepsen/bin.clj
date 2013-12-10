@@ -5,6 +5,7 @@
             [jepsen.failure :as failure])
   (:use jepsen.set-app
         [jepsen.cassandra :only [cassandra-app]]
+        jepsen.couchbase
         [jepsen.riak :only [riak-lww-all-app
                             riak-lww-quorum-app
                             riak-lww-sloppy-quorum-app
@@ -24,6 +25,7 @@
    "cassandra-isolation"    cassandra/isolation-app
    "cassandra-transaction"  cassandra/transaction-app
    "cassandra-transaction-dup" cassandra/transaction-dup-app
+   "couchbase"              couchbase-app
    "kafka"                  kafka/app
    "mongo-replicas-safe"    mongo-replicas-safe-app
    "mongo-safe"             mongo-safe-app
