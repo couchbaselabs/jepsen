@@ -11,11 +11,11 @@
 
     (reify SetApp
       (setup [app]
-          (cbc/force! conn k ""))
+          (cbc/force! conn k (list )))
 
       (add [app element]
           (let [res (cbc/cas! conn k 
-                             str element)])) 
+                             conj element)])) 
 
       (results [app]
            (set (cbc/get conn k)))
