@@ -49,5 +49,19 @@ role :couchbase do
       end 
     end
   end
+  
+  task :recluster do
+    sudo do
+      if name == 'n3'
+        ips = Array.new(6)
+        for i in 1..5
+          ips[i] = `cat /etc/hosts | grep -e n#{i}$ | grep -v localhost | awk '{ print $1 }'`.strip!
+        end
+        log 'Rebalancing partition [n3,n4,n5] ...'
+        exec! 'curl -s -u Administrator:password -d "ejectedNodes=ns_1@%s,ns_1@%s&knownNodes=ns_1@%s,ns_1@%s,ns_1@%s,ns_1@%s,ns_1@%s" http://localhost:8091/controller/rebalance' % (ips[1..2] + ips[1..5]), echo: true
+        sleep 120
+      end
+    end
+  end
 end
 
