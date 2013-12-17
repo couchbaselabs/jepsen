@@ -6,7 +6,7 @@
 
 (defn couchbase-app
   [opts]
-  (let [k       (get opts :key "test")
+  (let [k       (get opts :key "111")
         conn    (cbc/client "bucket-0" "" "http://n1:8091/")]
 
     (reify SetApp
