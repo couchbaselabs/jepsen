@@ -4,11 +4,13 @@
 [x] Set up redis
 [x] Set up mongo
 [x] Set up postgres
+[x] Set up couchbase
 [x] Write riak LWW app
 [x] Write riak CRDT app
 [x] Write mongo app
 [x] Write postgres app
 [x] Write redis app
+[x] Write couchbase app
 [ ] Decide on demo order
 [ ] Draw visuals
 [ ] Practice demo
